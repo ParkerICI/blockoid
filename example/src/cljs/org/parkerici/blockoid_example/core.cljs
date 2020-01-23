@@ -14,36 +14,21 @@
 (def blockdefs
   (map fn-block '(+ - * /)))
 
-;;; → blockoid
-;;; TODO color, contained blocks, etc
-(defn block-xml
-  [blockdef]
-  (let [type (:type blockdef)]
-    {:tag :block
-     :attrs {:type type}
-     }))
-
-;;; → blockoid
-(defn toolbox-category [cname blocks]
-  {:tag :category
-   :attrs {:name cname
-           :expanded true}
-   :content (mapv block-xml blocks)
-   })
-
-(defn toolbox []
-  {:tag "xml"
-   :content [(toolbox-category "Arithmetic" blockdefs)]})
+(def toolbox
+  `[:toolbox
+    [:category "Arithmetic" {}
+     ~@(mapv (fn [block] [:block (:type block)]) blockdefs)]])
 
 (defn initialize []
-  (prn :toolbox (toolbox))
   (bo/define-blocks blockdefs)
   (bo/define-workspace
     "blocklyDiv"
-    (toolbox)
+    toolbox
     {}
     (fn [_]
       (prn :change)
       )))
 
 
+;;; TODO code generation, re/frame, etc.
+;;; TODO Getting warnings for message string, maybe en not included properly

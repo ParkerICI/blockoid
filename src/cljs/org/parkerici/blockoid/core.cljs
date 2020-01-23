@@ -13,12 +13,31 @@
   [blockdefs]
   (.defineBlocksWithJsonArray js/Blockly (clj->js blockdefs)))
 
+(defmulti toolbox (fn [[type & rest]] type))
+
+(defmethod toolbox :toolbox
+  [[_ & contents]]
+  {:tag "xml"
+   :content (mapv toolbox contents)})
+
+(defmethod toolbox :category
+  [[_ name props & contents]]
+  {:tag :category
+   :attrs {:name name
+           :expanded true}
+   :content (mapv toolbox contents)})
+
+(defmethod toolbox :block
+  [[_ type & [props]]]
+  {:tag :block
+   :attrs {:type type}})
+
 (defn define-workspace
   [div toolbox-def options change-handler]
   (swap! workspace 
          (fn [_]
            ;; see options: https://developers.google.com/blockly/guides/get-started/web#configuration
-           (.inject js/Blockly div (clj->js (merge {:toolbox (xml/emit-str toolbox-def)} options)))))
+           (.inject js/Blockly div (clj->js (merge {:toolbox (xml/emit-str (toolbox toolbox-def))} options)))))
   (.addChangeListener @workspace change-handler))
 
 (defn get-workspace-xml-string
