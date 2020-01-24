@@ -6,6 +6,8 @@ A Clojurescript wrapping of [Blockly](https://developers.google.com/blockly/).
 
 ### TODO Toolbox format
 
+### TODO Compact format
+
 ## License
 
 Copyright © 2019 FIXME

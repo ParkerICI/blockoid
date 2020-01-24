@@ -1,5 +1,6 @@
 (ns org.parkerici.blockoid-example.core
-  (:require [org.parkerici.blockoid.core :as bo])
+  (:require [org.parkerici.blockoid.core :as bo]
+            [clojure.pprint :as pprint])
   )
 
 (defn fn-block [f]
@@ -9,6 +10,7 @@
             :name "a"}
            {:type "field_input"
             :name "b"}]
+   :fn f                                ;you can include extra fields
    })
 
 (def blockdefs
@@ -26,8 +28,11 @@
     toolbox
     {}
     (fn [_]
-      (prn :change)
-      )))
+      (let [s (with-out-str
+                (-> (bo/relevant-xml)
+                  bo/compact
+                  pprint/pprint))]
+        (set! (.-innerHTML (.getElementById js/document "compact")) s)))))
 
 
 ;;; TODO code generation, re/frame, etc.
