@@ -1,6 +1,6 @@
 # blockoid
 
-A Clojurescript wrapping of [Blockly](https://developers.google.com/blockly/). 
+A thin Clojurescript wrapping of [Blockly](https://developers.google.com/blockly/). 
 
 ## Usage
 

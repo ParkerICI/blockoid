@@ -1,7 +1,8 @@
 (ns org.parkerici.blockoid.core
   (:require
    [cljsjs.blockly :as blockly]         ;TODO namespace abbrev not used so not needed
-   [cljsjs.blockly.blocks] 
+   [cljsjs.blockly.blocks]
+   [cljsjs.blockly.en] 
    [clojure.data.xml :as xml]))
 
 ;;; This file contains a thin, application-independent Clojurescript API for Blockly.
@@ -13,6 +14,7 @@
   [blockdefs]
   (.defineBlocksWithJsonArray js/Blockly (clj->js blockdefs)))
 
+;;; See https://developers.google.com/blockly/guides/configure/web/toolbox
 (defmulti toolbox (fn [[type & rest]] type))
 
 (defmethod toolbox :toolbox
@@ -21,16 +23,56 @@
    :content (mapv toolbox contents)})
 
 (defmethod toolbox :category
-  [[_ name props & contents]]
+  [[_ name props & contents :as elt]]
+  (assert (or (nil? props) (map? props)) ;catch a common error
+          (str "Can't parse: " elt))
   {:tag :category
-   :attrs {:name name
-           :expanded true}
+   :attrs (merge
+           {:name name
+            :expanded true}
+           props)
    :content (mapv toolbox contents)})
 
 (defmethod toolbox :block
-  [[_ type & [props]]]
+  [[_ type & [props & subs] :as elt]]
+  (assert (or (nil? props) (map? props)) ;catch a common error
+          (str "Can't parse: " elt))
   {:tag :block
-   :attrs {:type type}})
+   :attrs (merge {:type type} props)
+   :content (mapv toolbox subs)})
+
+(defmethod toolbox :field
+  [[_ name value]]
+  {:tag :field
+   :attrs {:name name}
+   :content (str value)})
+
+(defmethod toolbox :value
+  [[_ name & subs]]
+  {:tag :value
+   :attrs {:name name}
+   :content (mapv toolbox subs)})
+
+(defmethod toolbox :value
+  [[_ name & subs]]
+  {:tag :value
+   :attrs {:name name}
+   :content (mapv toolbox subs)})
+
+(defmethod toolbox :next
+  [[_ block]]
+  {:tag :next
+   :content [(toolbox block)]})
+
+(defmethod toolbox :sep
+  [[_ name & subs]]
+  {:tag :sep})
+
+(defmethod toolbox :default
+  [elt]
+  (prn "No toolbox translation for: " elt))
+
+;;; TODO shadow is exactly the same as block
 
 (defn define-workspace
   [div toolbox-def options change-handler]
