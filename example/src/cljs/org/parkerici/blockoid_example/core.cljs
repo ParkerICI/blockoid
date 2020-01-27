@@ -23,25 +23,25 @@
              (mapv (fn [block] [:block (:type block)]) blockdefs))]])
 
 ;;; A near-copy of the toolbox in Blockly demo: https://blockly-demo.appspot.com/static/demos/toolbox/index.html
-;;; TODO colors
+
 
 (def demo-toolbox
   [:toolbox
-   [:category "Logic" {:color "red"}
+   [:category "Logic" {:colour "%{BKY_LOGIC_HUE}"}
     [:category "if" {}
      [:block "controls_if"]
      #_                                 ;TODO
      [:block "controls_if" {}
       [:mutation "else" 1]]           
      ]
-    [:category "Boolean" {:color "red"}
+    [:category "Boolean" {:colour "%{BKY_LOGIC_HUE}"}
      [:block "logic_compare"]
      [:block "logic_operation"]
      [:block "logic_negate"]
      [:block "logic_boolean"]
      [:block "logic_null"]
      [:block "logic_ternary"]]]
-   [:category "Loops" {:color "blue"}
+   [:category "Loops" {:colour "%{BKY_LOOPS_HUE}"}
     [:block "controls_repeat_ext" {}
      [:value  "TIMES"
       [:block "math_number" {}
@@ -61,7 +61,7 @@
     [:block "controls_forEach" {} ]
     [:block "controls_flow_statements" {} ]
     ]
-   [:category "Math" {:color "BLACK"}
+   [:category "Math" {:colour "%{BKY_MATH_HUE}"}
     [:block "math_number"  {}
      [:field "NUM" 123]]
     [:block "math_arithmetic" {}]
@@ -89,7 +89,7 @@
     [:block "math_random_float" {}]
     [:block "math_atan2" {}]
     ]
-   [:category "Lists" {}
+   [:category "Lists" {:colour "%{BKY_LISTS_HUE}"}
     [:block "lists_create_empty" {}]
     [:block "lists_create_with" {}]
     [:block
@@ -104,9 +104,11 @@
     [:block "lists_indexOf" {}]
     ]
    [:sep]
-   [:category "Variables" {:custom "VARIABLE"} ;TODO no idea what :custom does
+   [:category "Variables" {:colour "%{BKY_VARIABLES_HUE}"
+                           :custom "VARIABLE"} ;TODO no idea what :custom does
     ]
    ;; Omitting huge Randomize structure out of laziness
+   [:category "Library" {:expandad true}
    [:category "Jabberwocky" {}
     [:block "text_print" {}
      [:value "TEXT"
@@ -118,14 +120,14 @@
         [:block "text" {}
          [:field "TEXT" "  Did gyre and gimble in the wabe:"]]]]]]
     ;; etc
-    ]])
+    ]]])
 
 (defn initialize []
   (bo/define-blocks blockdefs)
   (bo/define-workspace
     "blocklyDiv"
 ;    toolbox
-    demo-toolbox
+    (bo/toolbox demo-toolbox)
     {}
     (fn [_]
       (let [s (with-out-str
