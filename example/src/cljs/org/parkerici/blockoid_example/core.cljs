@@ -119,21 +119,19 @@
        [:value "TEXT"
         [:block "text" {}
          [:field "TEXT" "  Did gyre and gimble in the wabe:"]]]]]]
-    ;; etc
     ]]])
 
 (defn initialize []
   (bo/define-blocks blockdefs)
   (bo/define-workspace
     "blocklyDiv"
-;    toolbox
     (bo/toolbox demo-toolbox)
     {}
     (fn [_]
       (let [s (with-out-str
                 (-> (bo/relevant-xml)
-                  bo/compact
-                  pprint/pprint))]
+                    bo/compact          ; comment out this line to see raw XML representation
+                    pprint/pprint))]
         (set! (.-innerHTML (.getElementById js/document "compact")) s)))))
 
 

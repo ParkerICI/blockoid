@@ -153,19 +153,8 @@
 
 ;;; Compact form is an EDN representation of block structure that is significantly smaller and more
 ;;; usable than the native XML. Documented here [TODO].
-
-(declare compact)
-
-(defn compact-list
-  [block-xml]
-  (if-let [next (some #(and (= (name (:tag %)) "next") %)
-                      (:content block-xml))]
-    (cons (compact block-xml)
-          (compact-list (first (:content next))))
-    (list (compact block-xml))))
-
-;;; TODO bug: The jabberwocky example in toolbox doesn't traverse next correctly
 ;;; TODO for consistency maybe redo with a multimethod
+
 (defn compact
   "Turns raw Block XML into compact form"
   [block-xml]
@@ -173,26 +162,16 @@
     (case (name (:tag block-xml))
       "xml"
       (map compact (:content block-xml))
-      ("field" "value")
+      ("field" "value" "statement")
       {(get-in block-xml [:attrs :name]) 
        (compact (first (:content block-xml)))}
-      ;; TODO next entries appear twice if they are inside a containing block
       "next"
       {:next (compact (first (:content block-xml)))} ;TODO ??? new
-      "statement"
-      {(get-in block-xml [:attrs :name])
-       (compact-list (first (:content block-xml)))
-       }
-      
       "block"
       {:type (get-in block-xml [:attrs :type])
-;;;TODO holdover       :btype (keyword (name (:tag block-xml)))
-       :children (if (= (:content block-xml) ["unknown"]) ;TODO ???
-                   nil
-                   (apply merge (map compact (:content block-xml))))}
+       :children (apply merge (map compact (:content block-xml)))}
       (throw (ex-info "Couldn't interpret Blockly XML"
-                      {:xml block-xml}))
-      )
+                      {:xml block-xml})))
     block-xml))
 
 ;;; TODO compact → Blockly
