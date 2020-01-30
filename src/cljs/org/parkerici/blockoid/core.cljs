@@ -95,19 +95,29 @@
           (.inject js/Blockly div (clj->js (merge {:toolbox (xml/emit-str toolbox-xml)} options))))
   (.addChangeListener @workspace change-handler))
 
-(defn get-block-xml
+(defn update-toolbox
+  [toolbox-def]
+  (.updateToolbox @workspace (xml/emit-str toolbox-def)))
+
+(defn get-block-xml-string
   [block]
   (->> block
        (.blockToDom js/Blockly.Xml)
-       (.domToText js/Blockly.Xml)
-       xml/parse-str))
+       (.domToText js/Blockly.Xml)))
 
-(defn get-workspace-xml
+(defn get-block-xml
+  [block]
+  (xml/parse-str (get-block-xml-string block)))
+
+(defn get-workspace-xml-string
   []
   (->> @workspace
        (.workspaceToDom js/Blockly.Xml)
-       (.domToText js/Blockly.Xml)
-       xml/parse-str))
+       (.domToText js/Blockly.Xml)))
+
+(defn get-workspace-xml
+  []
+  (xml/parse-str (get-workspace-xml-string)))
 
 (defn clear-workspace
   []
