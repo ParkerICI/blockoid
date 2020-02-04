@@ -134,4 +134,5 @@
                     pprint/pprint))]
         (set! (.-innerHTML (.getElementById js/document "compact")) s)))))
 
-
+(defn resizing []
+  (bo/auto-resize-workspace "blocklyArea"))

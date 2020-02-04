@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Blockoid demo - resizing</title>
+    <meta charset='utf-8'>
+  </head>
+  <body>
+    <table style="width: 100%">
+      <tr>
+	<td>
+	  <div id="blocklyArea" style="min-height:650px; height:100%; min-width:300px; width: 100%;"></div>
+	</td>
+	<td>
+	  <pre id="compact" style="height:500px; width: 600px; border: 1px solid gray; padding: 5px;">
+	</td>
+      </tr>
+    </table>
+    <div id="blocklyDiv" style="position: absolute;"></div>
+    <div id="app">
+    </div>
+    <script src="js/compiled/app.js"></script>
+  </body>
+  <script>org.parkerici.blockoid_example.core.initialize();
+    org.parkerici.blockoid_example.core.resizing();
+  </script>
+</html>
+
