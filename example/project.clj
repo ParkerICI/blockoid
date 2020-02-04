@@ -1,7 +1,7 @@
 (defproject blockoid-example "0.0.1-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/clojurescript "1.10.520"]
-                 [blockoid "0.0.1-SNAPSHOT"]
+                 [org.parkerici/blockoid "0.0.1-SNAPSHOT"]
                  ]
 
   :plugins [[lein-cljsbuild "1.1.7"]]

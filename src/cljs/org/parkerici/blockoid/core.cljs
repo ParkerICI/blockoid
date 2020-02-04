@@ -83,6 +83,7 @@
 
 ;;; Holds the Blockly workspace object
 (def workspace (atom nil)) 
+(def blockly-div (atom nil))
 
 (defn define-workspace
   [div toolbox-xml options change-handler]
@@ -93,11 +94,48 @@
  change-handler: a fn of one argument that gets called on any changes to the workspace. "
   (reset! workspace            ;; see options: https://developers.google.com/blockly/guides/get-started/web#configuration
           (.inject js/Blockly div (clj->js (merge {:toolbox (xml/emit-str toolbox-xml)} options))))
+  (reset! blockly-div div)
   (.addChangeListener @workspace change-handler))
 
 (defn update-toolbox
   [toolbox-def]
   (.updateToolbox @workspace (xml/emit-str toolbox-def)))
+
+
+
+;;; ≷≶≷≶ Workspace resizing ≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶
+
+;;; This insane rigamarole is to resize the blockly area,
+;;; see https://developers.google.com/blockly/guides/configure/web/resizable
+
+(def area-div (atom nil))
+
+;;; Compute the absolute coordinates and dimensions of blocklyArea
+(defn on-resize
+  [_]
+  (let [blockly-area (.getElementById js/document @area-div)
+        blockly-div (.getElementById js/document @blockly-div)]
+    (loop [element blockly-area
+           x 0
+           y 0]
+      (if element
+        (recur (.-offsetParent element)
+               (+ x (.-offsetLeft element))
+               (+ y (.-offsetTop element)))
+        (do
+          (set! (.-left (.-style blockly-div)) (str x "px"))
+          (set! (.-top (.-style blockly-div)) (str y "px"))
+          (set! (.-width (.-style blockly-div)) (str (.-offsetWidth blockly-area) "px"))
+          (set! (.-height (.-style blockly-div)) (str (.-offsetHeight blockly-area) "px"))
+          (.svgResize js/Blockly @workspace))))))
+
+(defn auto-resize-workspace
+  [div]
+  (reset! area-div div)
+  (.addEventListener js/window "resize" on-resize false)
+  (on-resize nil))
+
+;;; ≷≶≷≶ Workspace content ≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶≷≶
 
 (defn get-block-xml-string
   [block]

@@ -1,9 +1,8 @@
 (defproject org.parkerici/blockoid "0.0.1-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.10.1"]
-
                  [org.clojure/data.xml "0.2.0-alpha6"]
                  [org.clojure/clojurescript "1.10.520"]
-                 [cljsjs/blockly "3.20191014.4-0"]
+                 [cljsjs/blockly "3.20200123.1-0"]
                  [inflections "0.13.2"] ;TODO probably not?
                  ]
 
