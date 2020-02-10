@@ -2,7 +2,6 @@
   (:require
    cljsjs.blockly
    cljsjs.blockly.blocks
-   cljsjs.blockly.en 
    [clojure.data.xml :as xml]))
 
 ;;; This file contains a thin, application-independent Clojurescript API for Blockly.

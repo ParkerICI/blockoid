@@ -1,7 +1,8 @@
 (ns org.parkerici.blockoid-example.core
   (:require [org.parkerici.blockoid.core :as bo]
-            [clojure.pprint :as pprint])
-  )
+            [clojure.pprint :as pprint]
+            ;; Include the english strings (you can substitute your language of choice)
+            cljsjs.blockly.msg.en))      
 
 (defn fn-block [f]
   {:type (str f "-fn")
@@ -23,7 +24,6 @@
              (mapv (fn [block] [:block (:type block)]) blockdefs))]])
 
 ;;; A near-copy of the toolbox in Blockly demo: https://blockly-demo.appspot.com/static/demos/toolbox/index.html
-
 
 (def demo-toolbox
   [:toolbox
