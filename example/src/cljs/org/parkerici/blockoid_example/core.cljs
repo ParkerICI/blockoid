@@ -4,6 +4,8 @@
             ;; Include the english strings (you can substitute your language of choice)
             cljsjs.blockly.msg.en))      
 
+;;; TODO: have different demos; this stuff is currently unused
+
 (defn fn-block [f]
   {:type (str f "-fn")
    :message0 (str f "%1 %2")

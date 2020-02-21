@@ -47,7 +47,6 @@
      :compiler     {:main            org.parkerici.blockoid.core
                     :output-to       "resources/public/js/compiled/app.js"
                     :output-dir      "resources/public/js/compiled/outprod"
-                    ;; TODO :advanced is better but requires special handling for Blockly refs
-                    :optimizations   :simple
+                    :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}]})
