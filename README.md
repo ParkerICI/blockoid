@@ -4,25 +4,31 @@ A thin Clojurescript wrapping of [Blockly](https://developers.google.com/blockly
 
 ## Usage
 
-    [org.parkerici/blockoid "0.0.1-SNAPSHOT"]
+Add to dependencies:
 
-See the example for details.
+    [org.parkerici/blockoid "0.0.2"] 
 
-### TODO Toolbox format
+See [the example](example/project.clj) for details. 
 
-Blockly toolboxes are defined in XML. Blockoid provides 
+In your code, add the `require`:
 
+```clojure
+(ns ...
+  (:require [org.parkerici.blockoid.core :as blockoid]))
+```
 
-### TODO Compact format
+Usage details are in (a separate document)[doc/blockoid.md].
+
 
 ### Deployment to PICI mvn repo
 
 TODO this is destined for public release, so this and related changes are temporary.
 
-    export GH_USER=mtravers
-    export GH_TOKEN=<personal token supplied by github>
-    lein deploy github
-
+```bash
+export GH_USER=mtravers
+export GH_TOKEN=<personal token supplied by github>
+lein deploy github
+```
 
 ## License
 

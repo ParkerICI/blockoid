@@ -131,7 +131,7 @@
     {}
     (fn [_]
       (let [s (with-out-str
-                (-> (bo/relevant-xml)
+                (-> (bo/workspace-selected-xml)
                     bo/compact          ; comment out this line to see raw XML representation
                     pprint/pprint))]
         (set! (.-innerHTML (.getElementById js/document "compact")) s)))))
