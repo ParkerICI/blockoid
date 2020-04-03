@@ -2,6 +2,7 @@
   (:require
    cljsjs.blockly
    cljsjs.blockly.blocks
+   [re-frame.core :as rf]
    [clojure.data.xml :as xml]))
 
 ;;; A thin, application-independent Clojurescript API for Blockly.
@@ -68,6 +69,10 @@
   (on-resize nil))
 
 ;;; ⊓⊔⊓⊔ Workspace content ⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔
+
+(defn get-block
+  [id]
+  (.getBlockById @workspace id))
 
 (defn block-xml-string
   [block]
@@ -166,10 +171,10 @@
    ckey))
 
 (defmethod toolbox :button
-  [[_ label handler]]
+  [[_ label event]]
   {:tag :button
    :attrs {:text label
-           :callbackKey (callback-key label handler)}})
+           :callbackKey (callback-key label #(rf/dispatch event))}})
 
 (defmethod toolbox :block
   [[_ type & [props & subs] :as elt]]
@@ -226,6 +231,7 @@
       {:next (compact (first (:content block-xml)))} ;TODO ??? new
       "block"
       {:type (get-in block-xml [:attrs :type])
+       :id (get-in block-xml [:attrs :id]) ;TODO make optional?
        :children (apply merge (map compact (:content block-xml)))}
       (throw (ex-info "Couldn't interpret Blockly XML"
                       {:xml block-xml})))
