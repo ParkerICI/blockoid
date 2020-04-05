@@ -71,8 +71,19 @@
 ;;; ⊓⊔⊓⊔ Workspace content ⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔
 
 (defn get-block
-  [id]
-  (.getBlockById @workspace id))
+  "Returns the block js object"
+  [block-id]
+  (.getBlockById @workspace block-id))
+
+(defn get-block-field-value
+  "Get the value of a block field"
+  [block-id field-name]
+  (.getFieldValue (get-block block-id) field-name))
+
+(defn set-block-field-value
+  "Set the value of a block field"
+  [block-id field-name value]
+  (.setFieldValue (get-block block-id) value field-name))
 
 (defn block-xml-string
   [block]
