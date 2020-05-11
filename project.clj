@@ -1,4 +1,4 @@
-(defproject org.parkerici/blockoid "0.3.3"
+(defproject org.parkerici/blockoid "0.3.4"
   :description "Clojurescript shim for Blockly"
   :license {:name "Eclipse Public License" ;TODO 
             :url "http://www.eclipse.org/legal/epl-v10.html"}
