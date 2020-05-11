@@ -2,11 +2,15 @@
 
 A thin Clojurescript wrapping of [Blockly](https://developers.google.com/blockly/). 
 
+The combination of Blockly and Clojure allows for the easy creation of powerful combinatorial user interfaces and visual languages. See (this presentation)[http://hyperphor.com/papers/enflame-clojure-meetup.pdf] for an example.
+
 ## Usage
+
+Currently not in Clojars, so clone this repo and do `lein install`.
 
 Add to dependencies:
 
-    [org.parkerici/blockoid "0.0.2"] 
+    [org.parkerici/blockoid "0.3.4"] 
 
 See [the example](example/project.clj) for details. 
 
@@ -19,20 +23,8 @@ In your code, add the `require`:
 
 Usage details are in (a separate document)[doc/blockoid.md].
 
-
-### Deployment to PICI mvn repo
-
-TODO this is destined for public release, so this and related changes are temporary.
-
-```bash
-export GH_USER=mtravers
-export GH_TOKEN=<personal token supplied by github>
-lein deploy github
-```
+Blockoid loads Blockly via [a cljsjs package](https://github.com/cljsjs/packages/tree/master/blockly). If you need a newer version of Blockly, you will need to update it.
 
 ## License
 
-Copyright © 2020 Parker Institute for Cancer Immunotherapy
-
-This program and the accompanying materials are made available under the
-terms of the blah blah TODO
+Relased under MIT license, see the [LICENSE](LICENSE.md) file for details.
