@@ -1,8 +1,7 @@
 (defproject blockoid-example "0.0.1-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/clojurescript "1.10.520"]
-                 [org.parkerici/blockoid "0.0.1-SNAPSHOT"]
-                 ]
+                 [org.parkerici/blockoid "0.3.5"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
 
@@ -24,7 +23,6 @@
                     :exclusions [org.clojure/clojurescript]]]
     :plugins      [[lein-figwheel "0.5.19"]]}
    :prod {}
-
    }
   :cljsbuild
   {:builds
@@ -40,7 +38,6 @@
                     :optimizations        :none
                     :external-config      {:devtools/config {:features-to-install :all}}
                     }}
-    
 
     {:id           "prod"
      :source-paths ["src/cljs" "src/cljc"]

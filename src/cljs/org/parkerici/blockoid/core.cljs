@@ -220,34 +220,34 @@
   [elt]
   (prn "No toolbox translation for: " elt))
 
-;;; TODO shadow is exactly the same as block
-
 ;;; ⊓⊔⊓⊔ Compaction ⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔
 
 ;;; Compact form is an EDN representation of block structure that is significantly smaller and more
-;;; usable than the native XML. Documented here [TODO].
-;;; TODO for consistency maybe redo with a multimethod
-
+;;; usable than the native XML. Format is pretty self-explanatory (and may be extended to support
+;;; more Blockly features)
 (defn compact
   "Turns raw Block XML into compact form"
-  [block-xml]
+  [block-xml & [ids?]]
   (if (map? block-xml)
-    (case (name (:tag block-xml))
-      "xml"
-      (map compact (:content block-xml))
-      ("field" "value" "statement")
-      {(get-in block-xml [:attrs :name]) 
-       (compact (first (:content block-xml)))}
-      "next"
-      {:next (compact (first (:content block-xml)))} ;TODO ??? new
-      "block"
-      {:type (get-in block-xml [:attrs :type])
-       :id (get-in block-xml [:attrs :id]) ;TODO make optional?
-       :children (apply merge (map compact (:content block-xml)))}
-      (throw (ex-info "Couldn't interpret Blockly XML"
-                      {:xml block-xml})))
+    (let [base
+          (case (name (:tag block-xml))
+            "xml"
+            (map compact (:content block-xml))
+            ("field" "value" "statement")
+            {(get-in block-xml [:attrs :name]) 
+             (compact (first (:content block-xml)))}
+            "next"
+            {:next (compact (first (:content block-xml)))}
+            "block"
+            {:type (get-in block-xml [:attrs :type])
+             :children (apply merge (map compact (:content block-xml)))}
+            (throw (ex-info "Couldn't interpret Blockly XML"
+                            {:xml block-xml})))]
+      (if-let [id (and ids? (get-in block-xml [:attrs :id]))]
+        (assoc base :id id)
+        base))
     block-xml))
 
-;;; TODO compact → Blockly
+
 
 
