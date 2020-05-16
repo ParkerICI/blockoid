@@ -1,10 +1,10 @@
 # blockoid
 
-A thin Clojurescript wrapping of [Blockly](https://developers.google.com/blockly/). 
+A thin Clojurescript wrapping of [Blockly](https://developers.google.com/blockly/), a library for building Scratch-like interfaces in the browser.
 
-The combination of Blockly and Clojure allows for the easy creation of powerful combinatorial user interfaces and visual languages. See (this presentation)[https://drive.google.com/file/d/1Jfc94u42BDqmwSFDazTplDfVjzc1eVej/view?usp=sharing] for a real-world example of use.
+The combination of Blockly and Clojure allows for the easy creation of powerful combinatorial user interfaces and visual languages. See [this presentation](https://drive.google.com/file/d/1Jfc94u42BDqmwSFDazTplDfVjzc1eVej/view?usp=sharing) for a real-world example of use.
 
-file:doc/image1.png
+![screenshot](doc/image1.png)
 
 
 ## Usage
