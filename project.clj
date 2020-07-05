@@ -1,4 +1,4 @@
-(defproject org.parkerici/blockoid "0.3.5"
+(defproject org.parkerici/blockoid "0.3.6"
   :description "Clojurescript shim for Blockly"
   :license {:name "MIT License"
             :url "http://opensource.org/licenses/MIT"}
@@ -10,29 +10,19 @@
                  [cljsjs/blockly "3.20200123.1-0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
-  :repositories [["github" {:url "https://maven.pkg.github.com/ParkerICI/mvn-packages"
-                            :sign-releases false
-                            :username :env/gith_user
-                            :password :env/gh_token
-                            :credentials :gpg
-                            }]
-                 ]
-  :deploy-repositories [["clojars" {:sign-releases false
-                                    }]]
+  :deploy-repositories [["clojars" {:sign-releases false}]]
   :source-paths [ "src/cljs"]
   :test-paths [ "test/cljs"]
   :codox
   {:project {:name "Example Project", :version "1.0.0"}
    :namespaces :all
-   :doc-files ["doc/blockoid.md"]
-   }  
-
+   :doc-files ["doc/blockoid.md"]}  
   ;; Only for testing, there's no reason to build this independently.
   :cljsbuild
   {:builds
    [{:id           "dev"
      :source-paths ["src/cljs" "src/cljc"]
-     :compiler     {:main                 mrfrieze.core
+     :compiler     {:main                 blockoid.core
                     :output-to            "resources/public/js/compiled/app.js"
                     :output-dir           "resources/public/js/compiled/out"
                     :asset-path           "js/compiled/out"
@@ -41,7 +31,5 @@
                     :infer-externs        true
                     :external-config      {:devtools/config {:features-to-install :all}}
                     }}
-    
     ]}
-  
   )
