@@ -225,11 +225,13 @@
 ;;; Compact form is an EDN representation of block structure that is significantly smaller and more
 ;;; usable than the native XML. Format is pretty self-explanatory (and may be extended to support
 ;;; more Blockly features)
-(defn compact
+;;; TODO changed to actually pass the ids? argument down
+(defn compact-1
   "Turns raw Block XML into compact form"
-  [block-xml & [ids?]]
+  [ids? block-xml]
   (if (map? block-xml)
-    (let [base
+    (let [compact (partial compact-1 ids?)
+          base
           (case (name (:tag block-xml))
             "xml"
             (map compact (:content block-xml))
@@ -247,6 +249,13 @@
         (assoc base :id id)
         base))
     block-xml))
+
+
+(defn compact
+  [block-xml & [ids?]]                  ;TODO this arg needs to be passed down!
+  (compact-1 ids? block-xml))
+
+
 
 
 

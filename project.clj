@@ -1,4 +1,4 @@
-(defproject org.parkerici/blockoid "0.3.6"
+(defproject org.parkerici/blockoid "0.3.9"
   :description "Clojurescript shim for Blockly"
   :license {:name "MIT License"
             :url "http://opensource.org/licenses/MIT"}
