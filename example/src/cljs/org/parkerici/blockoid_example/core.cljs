@@ -22,7 +22,7 @@
 (def toolbox
   `[:toolbox
     [:category "Arithmetic" {}
-     ~@(cons [:block "math_number" [:field "NUM" 123]]
+     ~@(cons [:block "math_number" {} [:field "NUM" 123]]
              (mapv (fn [block] [:block (:type block)]) blockdefs))]])
 
 ;;; A near-copy of the toolbox in Blockly demo: https://blockly-demo.appspot.com/static/demos/toolbox/index.html

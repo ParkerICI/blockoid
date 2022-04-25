@@ -27,7 +27,7 @@
   :cljsbuild
   {:builds
    [{:id           "dev"
-     :source-paths ["src/cljs" "src/cljc"]
+     :source-paths ["src/cljs"]
      :figwheel     {:on-jsload "org.parkerici.blockoid-example.core/initialize"}
      :compiler     {:main                 org.parkerici.blockoid-example.core
                     :output-to            "resources/public/js/compiled/app.js"
@@ -40,7 +40,7 @@
                     }}
 
     {:id           "prod"
-     :source-paths ["src/cljs" "src/cljc"]
+     :source-paths ["src/cljs"]
      :compiler     {:main            org.parkerici.blockoid.core
                     :output-to       "resources/public/js/compiled/app.js"
                     :output-dir      "resources/public/js/compiled/outprod"
