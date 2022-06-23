@@ -1,7 +1,7 @@
 (defproject blockoid-example "0.0.1-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/clojurescript "1.10.520"]
-                 [org.parkerici/blockoid "0.3.7"]]
+                 [org.parkerici/blockoid "0.3.10"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
 
@@ -27,7 +27,7 @@
   :cljsbuild
   {:builds
    [{:id           "dev"
-     :source-paths ["src/cljs" "src/cljc"]
+     :source-paths ["src/cljs"]
      :figwheel     {:on-jsload "org.parkerici.blockoid-example.core/initialize"}
      :compiler     {:main                 org.parkerici.blockoid-example.core
                     :output-to            "resources/public/js/compiled/app.js"
@@ -40,7 +40,7 @@
                     }}
 
     {:id           "prod"
-     :source-paths ["src/cljs" "src/cljc"]
+     :source-paths ["src/cljs"]
      :compiler     {:main            org.parkerici.blockoid.core
                     :output-to       "resources/public/js/compiled/app.js"
                     :output-dir      "resources/public/js/compiled/outprod"
