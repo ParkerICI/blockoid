@@ -1,4 +1,4 @@
-(defproject org.parkerici/blockoid "0.3.9"
+(defproject org.parkerici/blockoid "0.3.10"
   :description "Clojurescript shim for Blockly"
   :license {:name "MIT License"
             :url "http://opensource.org/licenses/MIT"}
@@ -7,7 +7,7 @@
                  [org.clojure/data.xml "0.2.0-alpha6"]
                  [org.clojure/clojurescript "1.10.520"]
                  [re-frame "0.10.9"]
-                 [cljsjs/blockly "3.20200123.1-0"]]
+                 [cljsjs/blockly "5.20210325.1-0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
   :deploy-repositories [["clojars" {:sign-releases false}]]
