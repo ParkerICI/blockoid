@@ -29,3 +29,9 @@ Blockoid loads Blockly via [a cljsjs package](https://github.com/cljsjs/packages
 ## License
 
 Relased under MIT license. See the [LICENSE](LICENSE.md) file for details.
+
+
+## Deploy to Clojars
+
+	x- run 'lein deploy clojars' in terminal (not emacs)
+- supply token (in password manager) for password when prompted
