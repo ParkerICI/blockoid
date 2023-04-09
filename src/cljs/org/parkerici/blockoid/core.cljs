@@ -1,7 +1,7 @@
 (ns org.parkerici.blockoid.core
   (:require
-   cljsjs.blockly
-   cljsjs.blockly.blocks
+   ["blockly" :as blockly]
+   #_ "blockly.blocks"
    [re-frame.core :as rf]
    [clojure.data.xml :as xml]))
 

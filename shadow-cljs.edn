@@ -1,0 +1,9 @@
+;; shadow-cljs configuration
+{:lein true                             ;dependencies from lein project.clj
+ :builds
+ {:app {:target :browser
+        :compiler-options {:infer-externs true}
+        :output-dir "resources/public/cljs-out"
+        :asset-path "/cljs-out"         ;webserver path
+        :modules {:dev-main {:entries [org.parkerici.blockoid.core]}}}}}
+
