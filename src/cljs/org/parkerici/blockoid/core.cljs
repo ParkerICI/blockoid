@@ -1,6 +1,6 @@
 (ns org.parkerici.blockoid.core
   (:require
-   ["blockly" :as blockly]
+   ["blockly" :as Blockly]
    #_ "blockly.blocks"
    [re-frame.core :as rf]
    [clojure.data.xml :as xml]))
@@ -22,7 +22,7 @@
  change-handler: a fn of one argument (event) that gets called on any changes to the workspace. "
   [div toolbox-xml options change-handler]
   (reset! workspace            ;; see options: https://developers.google.com/blockly/guides/get-started/web#configuration
-          (.inject js/Blockly div (clj->js (merge {:toolbox (xml/emit-str toolbox-xml)} options))))
+          (Blockly/inject div (clj->js (merge {:toolbox (xml/emit-str toolbox-xml)} options))))
   (reset! blockly-div div)
   ;; Add button handlers
   (doseq [[ckey handler] @callback-keys]
@@ -150,7 +150,7 @@
 (defn define-blocks
   "Define new block types. Blockdefs is a seq of maps that are converted to JSON as per https://developers.google.com/blockly/guides/configure/web/custom-blocks"
   [blockdefs]
-  (.defineBlocksWithJsonArray js/Blockly (clj->js blockdefs)))
+  (Blockly/defineBlocksWithJsonArray (clj->js blockdefs)))
 
 ;;; ⊓⊔⊓⊔ Toolbox ⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔⊓⊔
 ;;; The toolbox method converts an EDN language into the XML required by Blockly to define the toolbox
