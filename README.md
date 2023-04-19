@@ -35,3 +35,30 @@ Relased under MIT license. See the [LICENSE](LICENSE.md) file for details.
 
 	x- run 'lein deploy clojars' in terminal (not emacs)
 - supply token (in password manager) for password when prompted
+
+### One-time setup
+
+    brew install npm
+	npm install -g shadow-cljs
+
+    npm install
+
+### Building app
+
+    shadow-cljs compile app
+
+To develop with automatic reload
+
+    shadow-cljs watch app
+
+### Installing for local use
+
+    npm link
+	
+Argh, looks like the usual fuckwit stuff: https://medium.com/@debshish.pal/publish-a-npm-package-locally-for-testing-9a00015eb9fd
+
+
+
+### Installing for global use
+
+    

@@ -6,5 +6,9 @@
                            }
         :output-dir "resources/public/cljs-out"
         :asset-path "/cljs-out"         ;webserver path
-        :modules {:dev-main {:entries [org.parkerici.blockoid.example.core]}}}}}
+        :modules {:dev-main {:entries [org.parkerici.blockoid.example.core]}}}
+  :lib {:target :npm-module
+        :output-dir "target/npm"
+        :exports {:blockoid "Blockoid"}
+        :compiler-options {:module-type 'commonjs}}}}
 

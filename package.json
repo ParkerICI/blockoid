@@ -1,32 +1,34 @@
 {
-  "name": "blockoid",
-  "version": "1.0.0",
-  "description": "CLJS wrapper for Blockly",
-  "directories": {
-    "doc": "doc",
-    "test": "test"
-  },
-  "dependencies": {
-    "blockly": "8.20220331.0-beta.1",
-    "create-react-class": "15.6.3",
-    "react": "16.8.6",
-    "react-dom": "16.8.6"
-  },
-  "devDependencies": {
-    "shadow-cljs": "^2.22.10"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Candelbio/blockoid.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Candelbio/blockoid/issues"
-  },
-  "homepage": "https://github.com/Candelbio/blockoid"
+    "name": "blockoid",
+    "version": "1.0.0",
+    "description": "CLJS wrapper for Blockly",
+    "homepage": "https://github.com/Candelbio/blockoid",  
+    "main": "target/npm/org.parkerici.blockoid.core.js",
+    "directories": {
+	"doc": "doc",
+	"test": "test"
+    },
+    "dependencies": {
+	"blockly": "8.20220331.0-beta.1",
+	"create-react-class": "15.6.3",
+	"react": "16.8.6",
+	"react-dom": "16.8.6"
+    },
+    "devDependencies": {
+	"shadow-cljs": "^2.22.10"
+    },
+    "scripts": {
+	"test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+	"type": "git",
+	"url": "git+https://github.com/Candelbio/blockoid.git"
+    },
+    "keywords": [],
+    "author": "Mike Travers",
+    "license": "ISC",
+    "bugs": {
+	"url": "https://github.com/Candelbio/blockoid/issues"
+    }
+
 }
