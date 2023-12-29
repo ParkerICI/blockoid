@@ -1,6 +1,6 @@
 {
     "name": "blockoid",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "CLJS wrapper for Blockly",
     "homepage": "https://github.com/Candelbio/blockoid",  
     "main": "target/npm/org.parkerici.blockoid.core.js",

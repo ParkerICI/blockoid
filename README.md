@@ -43,22 +43,24 @@ Relased under MIT license. See the [LICENSE](LICENSE.md) file for details.
 
     npm install
 
-### Building app
+### Building the librariy
 
-    shadow-cljs compile app
-
-To develop with automatic reload
-
-    shadow-cljs watch app
+    shadow-cljs compile lib
 
 ### Installing for local use
 
     npm link
 	
-Argh, looks like the usual fuckwit stuff: https://medium.com/@debshish.pal/publish-a-npm-package-locally-for-testing-9a00015eb9fd
+See here for other techniques: https://medium.com/@debshish.pal/publish-a-npm-package-locally-for-testing-9a00015eb9fd
 
-
+I think npm pack might be worth trying
 
 ### Installing for global use
 
     
+### Running example
+
+    cd example
+    shadow-cljs compile app
+	
+TODO can't get a compile to work	
